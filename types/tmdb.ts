@@ -1,39 +1,94 @@
 // TypeScript interfaces for TMDB API responses
 
+/** Minimal movie definition used in list responses */
 export interface Movie {
   id: number;
   title: string;
   overview: string;
-  poster_path: string;
-  backdrop_path: string;
+  poster_path: string | null;
+  backdrop_path: string | null;
   release_date: string;
   vote_average: number;
-  genre_ids: number[];
+  vote_count: number;
   popularity: number;
+  genre_ids: number[];
+  adult: boolean;
+  original_language: string;
+  original_title: string;
+  video: boolean;
 }
 
-export interface TMDBResponse {
-  results: Movie[];
+/** Payload returned from paginated TMDB endpoints */
+export interface MovieListResponse {
   page: number;
+  results: Movie[];
   total_pages: number;
   total_results: number;
 }
 
-export interface DetailedMovie extends Movie {
-  genres: Genre[];
-  runtime: number;
-  budget: number;
-  revenue: number;
-  status: string;
-  tagline: string;
-  // Add more fields as needed
-}
-
+/** Represents a TMDB movie genre */
 export interface Genre {
   id: number;
   name: string;
 }
 
+/** Production company metadata from movie details */
+export interface ProductionCompany {
+  id: number;
+  name: string;
+  logo_path: string | null;
+  origin_country: string;
+}
+
+/** Spoken language metadata from movie details */
+export interface SpokenLanguage {
+  english_name: string;
+  iso_639_1: string;
+  name: string;
+}
+
+/** Detailed movie information (extended from list item) */
+export interface DetailedMovie extends Movie {
+  tagline: string | null;
+  runtime: number | null;
+  budget: number;
+  revenue: number;
+  status: string;
+  genres: Genre[];
+  production_companies: ProductionCompany[];
+  spoken_languages: SpokenLanguage[];
+  homepage: string | null;
+  imdb_id: string | null;
+}
+
+/** Cast member metadata */
+export interface Cast {
+  id: number;
+  name: string;
+  character: string;
+  profile_path: string | null;
+  order: number;
+  cast_id: number;
+  gender: number | null;
+}
+
+/** Crew member metadata */
+export interface Crew {
+  id: number;
+  name: string;
+  job: string;
+  department: string;
+  profile_path: string | null;
+}
+
+/** Credits payload containing cast and crew */
+export interface Credits {
+  id: number;
+  cast: Cast[];
+  crew: Crew[];
+}
+
+/** Response payload for fetching genres */
 export interface TMDBGenresResponse {
   genres: Genre[];
 }
