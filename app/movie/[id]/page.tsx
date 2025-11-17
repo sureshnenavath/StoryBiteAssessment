@@ -1,4 +1,5 @@
 import { fetchMovieDetail } from '@/lib/movies'
+import type { MovieDetail } from '@/lib/omdb'
 import Image from 'next/image'
 import Link from 'next/link'
 import MovieActionButtons from '@/components/MovieActionButtons'
@@ -8,7 +9,7 @@ export const dynamic = 'force-dynamic'
 export const revalidate = 0
 
 export default async function MoviePage({ params }: { params: { id: string } }) {
-  let data: any = null
+  let data: MovieDetail | null = null
   try {
     data = await fetchMovieDetail(params.id)
   } catch (err) {
@@ -66,15 +67,18 @@ export default async function MoviePage({ params }: { params: { id: string } }) 
               <p className="text-gray-300 leading-relaxed text-base sm:text-lg">{data.Plot || 'No plot available.'}</p>
             </div>
             
-            {data.Genre && (
+            {data?.Genre && (
               <div>
                 <h3 className="text-lg font-semibold mb-2 text-gray-400">Genres</h3>
                 <div className="flex flex-wrap gap-2">
-                  {data.Genre.split(',').map((g, i) => (
-                    <span key={i} className="px-3 py-1.5 bg-gradient-to-r from-red-900/40 to-pink-900/40 border border-red-700/50 rounded-full text-sm">
-                      {g.trim()}
-                    </span>
-                  ))}
+                  {data.Genre.split(',').map((g: string, i: number) => {
+                    const label = g.trim()
+                    return (
+                      <span key={i} className="px-3 py-1.5 bg-gradient-to-r from-red-900/40 to-pink-900/40 border border-red-700/50 rounded-full text-sm">
+                        {label}
+                      </span>
+                    )
+                  })}
                 </div>
               </div>
             )}
