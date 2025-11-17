@@ -4,8 +4,8 @@ import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 
 export const metadata: Metadata = {
-  title: 'StreamDash - Your Premium Streaming Destination',
-  description: 'Discover and stream the latest movies and TV shows. Powered by OMDb API.',
+  title: 'STREAMHUB - Your Premium Streaming Destination',
+  description: 'STREAMHUB: Discover and stream the latest movies and TV shows. Powered by OMDb API.',
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

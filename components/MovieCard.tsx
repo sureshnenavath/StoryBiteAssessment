@@ -4,25 +4,26 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useState } from 'react'
 
-type Props = { imdbId: string; title: string; posterUrl?: string | null }
+type Props = { imdbId: string; title: string; posterUrl?: string | null; forceHover?: boolean }
 
-export default function MovieCard({ imdbId, title, posterUrl }: Props) {
+export default function MovieCard({ imdbId, title, posterUrl, forceHover = false }: Props) {
   const [isHovered, setIsHovered] = useState(false)
+  const activeHover = isHovered || forceHover
 
   return (
     <div className="flex-shrink-0">
       <Link 
         href={`/movie/${imdbId}`} 
-        className="block w-40 sm:w-48 lg:w-56 group"
+        className={`block w-40 sm:w-48 lg:w-56 group`}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
-        <div className="relative aspect-[2/3] mb-3 overflow-hidden rounded-lg bg-gradient-to-br from-neutral-800 via-neutral-850 to-neutral-900 shadow-xl transition-all duration-500 ease-out transform-gpu group-hover:scale-105 group-hover:-translate-y-3 group-hover:shadow-2xl group-hover:shadow-red-900/40 group-hover:ring-2 group-hover:ring-red-500/60 will-change-transform\" style={{ transformStyle: 'preserve-3d' }}>
+        <div className={`relative aspect-[2/3] mb-3 overflow-hidden rounded-lg bg-gradient-to-br from-neutral-800 via-neutral-850 to-neutral-900 shadow-xl transition-all duration-500 ease-out transform-gpu will-change-transform ${activeHover ? 'scale-105 -translate-y-3 shadow-2xl shadow-red-900/40 ring-2 ring-red-500/60' : ''}`} style={{ transformStyle: 'preserve-3d' }}>
         {posterUrl && posterUrl !== 'N/A' ? (
           <>
-            <Image src={posterUrl} alt={title} fill sizes="(max-width: 640px) 144px, (max-width: 1024px) 176px, 208px" className="object-cover transition-transform duration-700 group-hover:scale-110" />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-            {isHovered && (
+            <Image src={posterUrl} alt={title} fill sizes="(max-width: 640px) 144px, (max-width: 1024px) 176px, 208px" className={`object-cover transition-transform duration-700 ${activeHover ? 'scale-110' : ''}`} />
+            <div className={`absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 transition-opacity duration-300 ${activeHover ? 'opacity-100' : ''}`} />
+            {activeHover && (
               <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent flex items-end p-3 animate-fadeIn">
                 <div className="space-y-1">
                   <p className="text-xs sm:text-sm font-semibold line-clamp-2">{title}</p>
@@ -48,7 +49,7 @@ export default function MovieCard({ imdbId, title, posterUrl }: Props) {
           </div>
         )}
         </div>
-        <h3 className="text-xs sm:text-sm font-medium text-gray-300 group-hover:text-white transition-colors duration-300 line-clamp-2 px-1">{title}</h3>
+        <h3 className={`text-xs sm:text-sm font-medium text-gray-300 transition-colors duration-300 line-clamp-2 px-1 ${activeHover ? 'text-white' : ''}`}>{title}</h3>
       </Link>
     </div>
   )

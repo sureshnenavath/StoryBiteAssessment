@@ -8,7 +8,7 @@ export default function Footer() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
           <div>
-            <h3 className="text-red-600 font-bold text-xl mb-4">STREAMDASH</h3>
+            <h3 className="text-red-600 font-bold text-xl mb-4">STREAMHUB</h3>
             <p className="text-gray-400 text-sm leading-relaxed">Your premium destination for discovering and streaming the latest movies and TV shows.</p>
             <div className="flex gap-4 mt-4">
               <a href="#" className="text-gray-400 hover:text-red-500 transition-colors" aria-label="Facebook">
@@ -70,7 +70,7 @@ export default function Footer() {
         
         <div className="border-t border-white/10 pt-8">
           <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
-            <p className="text-gray-500 text-sm">© 2025 StreamDash, Inc. All rights reserved.</p>
+            <p className="text-gray-500 text-sm">© 2025 STREAMHUB, Inc. All rights reserved.</p>
             <div className="flex gap-6 text-xs text-gray-500">
               <span>Powered by OMDb API</span>
               <span>Built with Next.js 14</span>

@@ -10,8 +10,8 @@ export default function Header() {
     <header className="fixed top-0 left-0 right-0 z-50 bg-gradient-to-b from-black via-black/80 to-transparent">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
         <div className="flex items-center gap-8">
-          <Link href="/" className="text-red-600 font-bold text-2xl sm:text-3xl tracking-tight hover:text-red-500 transition">
-            STREAMDASH
+          <Link href="/" className="text-red-600 font-bold text-2xl sm:text-3xl tracking-tight hover:text-red-500 transition" aria-label="STREAMHUB Home">
+            STREAMHUB
           </Link>
           <nav className="hidden md:flex items-center gap-6">
             <Link href="/" className="text-sm font-medium hover:text-gray-300 transition-all duration-200 hover:scale-105 relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 hover:after:w-full after:bg-red-600 after:transition-all after:duration-300">Home</Link>
